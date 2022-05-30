@@ -11,30 +11,34 @@ import {
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
+import { Route, Routes } from 'react-router-dom';
+import Landing from './views/Landing';
+import Home from './layouts/Home';
+import ProtectedRoute from './components/ProtectedRoute';
+import Auth from './layouts/Auth';
+import CreateListing from './views/CreateListing';
+import Auction from './views/Auction';
+import UserListings from './views/UserListings';
+import About from './views/About';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="about" element={<About />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="product" element={<ProtectedRoute />}>
+            <Route path=":productId" element={<Auction />} />
+          </Route>
+          <Route path="create" element={<ProtectedRoute />}>
+            <Route path="listing" element={<CreateListing />} />
+          </Route>
+          <Route path="/my-listings" element={<UserListings />} />
+        </Route>
+
+        <Route path="auth" element={<Auth />} />
+      </Routes>
     </ChakraProvider>
   );
 }
