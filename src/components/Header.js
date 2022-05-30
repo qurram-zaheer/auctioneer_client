@@ -153,7 +153,13 @@ export default function Header() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem onClick={logout}>Logout</MenuItem>
+                  {!email ? (
+                    <MenuItem onClick={() => navigate('/auth')}>
+                      Log in
+                    </MenuItem>
+                  ) : (
+                    <MenuItem onClick={logout}>Logout</MenuItem>
+                  )}
                 </MenuList>
               </Menu>
             </Stack>
