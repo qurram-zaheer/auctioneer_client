@@ -1,12 +1,4 @@
-import {
-  Box,
-  Center,
-  HStack,
-  list,
-  Skeleton,
-  Spinner,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Center, HStack, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { getAllListings } from '../lib/api';
